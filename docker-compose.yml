@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  backend:
+    build: ./services/backend
+    command: python manage.py run -h 0.0.0.0
+    volumes:
+      - ./services/backend/:/usr/src/app/
+    ports:
+      - 5000:5000
+    env_file:
+      - ./.env.dev
+  db:
+    image: postgres:13-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=db_user
+      - POSTGRES_PASSWORD=db_password
+      - POSTGRES_DB=database
+  frontend:
+    build: ./services/frontend
+    command: npm run dev
+
+volumes:
+  postgres_data:
