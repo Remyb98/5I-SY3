@@ -27,6 +27,7 @@ services:
     build: ./services/nginx
     ports:
       - 1337:80
+      - 1338:8080
     depends_on:
       - backend
 
