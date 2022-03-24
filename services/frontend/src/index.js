@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-function component() {
+function mComponent() {
   const element = document.createElement('div');
 
   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
@@ -8,4 +8,4 @@ function component() {
   return element;
 }
 
-document.body.appendChild(component());
+document.body.appendChild(mComponent());
