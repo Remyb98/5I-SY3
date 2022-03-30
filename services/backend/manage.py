@@ -11,11 +11,14 @@ def create_db():
     db.drop_all()
     db.create_all()
     db.session.commit()
+    seed_db()
 
 
 @cli.command("seed_db")
 def seed_db():
-    db.session.add(User(email="remy@mail.com"))
+    db.session.add(User(firstname="John", lastname="Doe", age="12"))
+    db.session.add(User(firstname="Rémy", lastname="Barberet", age="12"))
+    db.session.add(User(firstname="Léo", lastname="Chardon", age="12"))
     db.session.commit()
 
 
