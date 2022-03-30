@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request, abort, Response
+from flask_cors import cross_origin
 from flask_sqlalchemy import SQLAlchemy
-
 
 app = Flask(__name__)
 app.config.from_object("project.config.Config")
@@ -28,6 +28,7 @@ class User(db.Model):
 
 
 @app.route("/", methods=["POST"])
+@cross_origin()
 def create():
     data = request.get_json()
     user = User(
@@ -42,11 +43,13 @@ def create():
 
 
 @app.route("/", methods=["GET"])
+@cross_origin()
 def get_all():
     return jsonify(data=[person.as_dict() for person in User.query.all()])
 
 
 @app.route("/<int:id>", methods=["GET"])
+@cross_origin()
 def get_one(id):
     user = User.query.filter_by(id=id).first()
     if not user:
@@ -55,6 +58,7 @@ def get_one(id):
 
 
 @app.route("/<int:id>", methods=["PUT"])
+@cross_origin()
 def update(id):
     user = User.query.filter_by(id=id).first()
     if not user:
@@ -68,6 +72,7 @@ def update(id):
 
 
 @app.route("/<int:id>", methods=["DELETE"])
+@cross_origin()
 def delete(id):
     user = User.query.filter_by(id=id).first()
     if not user:
