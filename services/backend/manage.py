@@ -1,3 +1,5 @@
+"""Module for run command and start the server
+"""
 from flask.cli import FlaskGroup
 
 from project import app, db, User
@@ -8,17 +10,19 @@ cli = FlaskGroup(app)
 
 @cli.command("create_db")
 def create_db():
+    """Create the database
+    """
     db.drop_all()
     db.create_all()
     db.session.commit()
-    seed_db()
 
 
 @cli.command("seed_db")
 def seed_db():
-    db.session.add(User(firstname="John", lastname="Doe", age="12"))
-    db.session.add(User(firstname="Rémy", lastname="Barberet", age="12"))
-    db.session.add(User(firstname="Léo", lastname="Chardon", age="12"))
+    """Add fixtures to the database
+    """
+    db.session.add(User(firstname="John", lastname="Doe", age="32"))
+    db.session.add(User(firstname="Jane", lastname="Doe", age="30"))
     db.session.commit()
 
 
