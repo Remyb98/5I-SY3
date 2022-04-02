@@ -20,9 +20,9 @@ services:
   frontend:
     build:
       context: ./services/frontend
-    command: npm run serve
+      dockerfile: Dockerfile.prod
     expose:
-      - 9000
+      - 80
   nginx:
     build: ./services/nginx
     ports:

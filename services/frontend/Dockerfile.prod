@@ -1,0 +1,11 @@
+FROM nginx
+
+WORKDIR /usr/share/nginx/html
+
+RUN apt-get update && apt-get install -y nodejs npm
+
+COPY . /usr/share/nginx/html
+
+RUN npm install
+
+RUN npm run build
